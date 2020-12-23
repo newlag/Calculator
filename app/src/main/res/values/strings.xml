@@ -3,7 +3,7 @@
     <string name="addition_title">+</string>
     <string name="subtraction_title">-</string>
     <string name="multiplication_title">*</string>
-    <string name="division_title">/</string>
+    <string name="division_title">÷</string>
     <string name="equal_title">=</string>
     <string name="input_hint">Введите число</string>
     <string name="clear_title">Очистить</string>

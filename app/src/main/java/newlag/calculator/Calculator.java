@@ -85,7 +85,7 @@ public class Calculator {
                 if (lastCharIsSymbol) {
                     number.append(c);
                 } else {
-                    symbolsList.add(c);
+                    if(i != (input.length() - 1)) symbolsList.add(c);
                 }
                 lastCharIsSymbol = true;
             }

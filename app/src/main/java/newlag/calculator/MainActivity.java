@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     inputAppend("*");
                     break;
                 case R.id.div_button: // Поделить
-                    inputAppend("/");
+                    inputAppend("÷");
                     break;
             }
         } else if (id == R.id.sub_button) {
