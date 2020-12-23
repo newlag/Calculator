@@ -22,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 if (".".equals(source)) {
-                    String[] nums = input.getText().toString().split("[+\\-/*]");
-                    if (!nums[nums.length - 1].contains(",")) {
-                        input.setText(input.getText().toString() + ",");
+                    String inputText = input.getText().toString();
+                    String[] nums = inputText.split("[+\\-/*]");
+                    if (nums.length == 0 || !nums[nums.length - 1].contains(",")) {
+                        if (inputText.length() > 0 && isNumber(inputText.charAt(inputText.length() - 1)))
+                            input.setText(inputText + ",");
                         input.setSelection(input.getText().length());
                     }
                     return "";
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         } else if (id == R.id.sub_button) {
-            if (inputLength > 1 && isNumber(text.charAt(inputLength - 2)) || inputLength == 0) {
+            if (inputLength > 1 && isNumber(text.charAt(inputLength - 2)) && text.charAt(inputLength - 1) != ',' || inputLength == 0)  {
                 inputAppend("-");
             }
         }
