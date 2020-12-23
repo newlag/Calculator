@@ -15,30 +15,27 @@ public class Calculator {
 
         sort(input);
 
-        for (int i = (symbolsList.size() - 1); i > 0; i--) {
+        for (int i = 0; i < symbolsList.size(); i++) {
             double result;
-            if (symbolsList.get(i).equals('*') || symbolsList.get(i).equals('/')) {
+            if (symbolsList.get(i).equals('*') || symbolsList.get(i).equals('÷')) {
                 result = solution(symbolsList.get(i), i);
                 updateLists(i, result);
+                i--;
             }
         }
 
-        for (int i = (symbolsList.size() - 1); i > 0; i--) {
+        for (int i = 0; i < symbolsList.size(); i++) {
             double result;
             if (symbolsList.get(i).equals('+') || symbolsList.get(i).equals('-')) {
                 result = solution(symbolsList.get(i), i);
                 updateLists(i, result);
+                i--;
             }
         }
-
-        if (numbersList.size() > 1) updateLists(0, solution(symbolsList.get(0), 0));
-
-        double result = numbersList.get(0);
-        numbersList.remove(0);
-        return result;
+        return numbersList.get(0);
     }
 
-    private double solution(int symbol, int i) throws ZeroDivisionException {
+    private double solution(Character symbol, int i) throws ZeroDivisionException {
         switch (symbol) {
             case '+':
                 return numbersList.get(i) + numbersList.get(i + 1);
@@ -46,8 +43,8 @@ public class Calculator {
                 return numbersList.get(i) - numbersList.get(i + 1);
             case '*':
                 return numbersList.get(i) * numbersList.get(i + 1);
-            case '/':
-                if (numbersList.get(i + 1) == 0) {
+            case '÷':
+                if (numbersList.get(i + 1) == 0.0F) {
                     throw new ZeroDivisionException("Попытка деления на ноль.");
                 }
                 return numbersList.get(i) / numbersList.get(i + 1);
