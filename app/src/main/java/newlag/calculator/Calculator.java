@@ -12,7 +12,6 @@ public class Calculator {
 
     public double calculate(String input) throws ZeroDivisionException {
         input = input.replaceAll("[,]",".");
-
         sort(input);
 
         for (int i = 0; i < symbolsList.size(); i++) {
@@ -71,25 +70,27 @@ public class Calculator {
         StringBuilder number = new StringBuilder();
         number.append(input.charAt(0));
         boolean lastCharIsSymbol = false;
-
-        for (int i = 1; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if (isNumber(c) || c == '.') {
-                number.append(c);
-                lastCharIsSymbol = false;
-            } else {
-                if (number.length() > 0) {
-                    numbersList.add(Double.valueOf(number.toString()));
-                    number.setLength(0);
-                }
-                if (lastCharIsSymbol) {
+        if (input.length() > 1) {
+            for (int i = 1; i < input.length(); i++) {
+                char c = input.charAt(i);
+                if (isNumber(c) || c == '.') {
                     number.append(c);
+                    lastCharIsSymbol = false;
                 } else {
-                    if(i != (input.length() - 1)) symbolsList.add(c);
+                    if (number.length() > 0) {
+                        numbersList.add(Double.valueOf(number.toString()));
+                        number.setLength(0);
+                    }
+                    if (lastCharIsSymbol) {
+                        number.append(c);
+                    } else {
+                        if(i != (input.length() - 1)) symbolsList.add(c);
+                    }
+                    lastCharIsSymbol = true;
                 }
-                lastCharIsSymbol = true;
             }
+            if (number.length() > 0 && number.charAt(0) != '-' || number.length() > 1) numbersList.add(Double.valueOf(number.toString()));
+            if (numbersList.size() == symbolsList.size()) symbolsList.remove(symbolsList.size() - 1);
         }
-        if (number.length() > 0) numbersList.add(Double.valueOf(number.toString()));
     }
 }
