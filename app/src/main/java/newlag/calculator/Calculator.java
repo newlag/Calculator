@@ -14,6 +14,8 @@ public class Calculator {
         input = input.replaceAll("[,]",".");
         sort(input);
 
+        if (numbersList.size() == 0) throw new StringIndexOutOfBoundsException();
+
         for (int i = 0; i < symbolsList.size(); i++) {
             double result;
             if (symbolsList.get(i).equals('*') || symbolsList.get(i).equals('÷')) {
